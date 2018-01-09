@@ -33,7 +33,7 @@
       }]
     }]
   };
-  /*const indBoxWithKeyName = function (object) {
+  const findBoxWithKeyName = function (object) {
     let boxesPile = object.objectContent; // складываем все 'коробки', лежащие внутри главной, в 'кучу'
     while (boxesPile.length > 0) { // пока в 'куче' есть коробки
       let box = boxesPile.pop(); // извлекаем из кучи последнюю 'коробку'
@@ -41,24 +41,26 @@
       if (box.objectContent !== '') { // если 'коробка' не пустая
         if (Array.isArray(box.objectContent)) { // если в ней массив
           innerItemsOfBox = box.objectContent; // кладём их в массив для содержимого исследуемой коробки
-        } else {
-          // если в ней один предмет (объект), то проверяем его тип
+        } else if (typeof object.objectContent === "object") { // если в ней объект, то проверяем его objectType
           if (box.objectContent.objectType === 'key') { // если это ключ - возвращаем имя родительской коробки
             return box.objectName;
           } else { // если это 'коробка',
             innerItemsOfBox.push(box.objectContent); // кладём 'коробку' в массив для содержимого исследуемой коробки
           }
         }
-      }
-      for (let i = 0; i < innerItemsOfBox.length; i++) { // перебираем массив для содержимого исследуемой коробки
-        if (innerItemsOfBox[i].objectType === 'box') { // 'коробку' кладём в 'кучу'
-          boxesPile.push(innerItemsOfBox[i]);
-        } else if (innerItemsOfBox[i].objectType === 'key') { // если это ключ - возвращаем имя родительской коробки
-          return box.objectName;
+        for (let i = 0; i < innerItemsOfBox.length; i++) { // перебираем массив для содержимого исследуемой коробки
+          if (innerItemsOfBox[i].objectType === 'box') { // 'коробку' кладём в 'кучу'
+            boxesPile.push(innerItemsOfBox[i]);
+          } else if (innerItemsOfBox[i].objectType === 'key') { // если это ключ - возвращаем имя родительской коробки
+            return box.objectName;
+          }
         }
+      } else {
+        return null;
       }
     }
-  };*/
+  };
+  /*
   const findBoxWithKeyName = function (object) {
     let boxWithKeyName;
     if (object.objectContent !== '') { // если 'коробка' не пустая
@@ -83,7 +85,7 @@
     } else {
       return null;
     }
-  };
+  };*/
 
   const showSearchingResult = function (result) {
     if (result === null) {
